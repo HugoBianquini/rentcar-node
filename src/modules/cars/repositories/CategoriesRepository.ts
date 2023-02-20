@@ -12,7 +12,7 @@ class CategoryRepository {
     const category = new Category()
 
     Object.assign(category, {
-      name, 
+      name,
       description,
       created_at: new Date()
     })
