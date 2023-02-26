@@ -4,11 +4,10 @@ interface IRequest {
   name: string;
   description: string;
 }
-
 class CreateSpecificationUseCase {
 
-  constructor(private specificationsRepository: ISpecificationRepository) {
-
+  constructor(
+    private specificationsRepository: ISpecificationRepository) {
   }
 
   execute({ name, description }: IRequest): void {
