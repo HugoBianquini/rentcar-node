@@ -12,7 +12,12 @@ __RentCar Node__ is the backend service responsible to serve all rentCar front-e
 
 # Database
 
-In order to create new migrations, run he following command:
+In order to create new migrations, run the following command:
 ```
 yarn typeorm migration:create -n <MIGRATON_NAME>
+```
+
+To execute migrations in your local database, run:
+```
+yarn typeorm migration:run
 ```
