@@ -21,10 +21,14 @@ export async function checkAuthentication(req: Request, res: Response, next: Nex
     const { sub: user_id } = verify(token, "secret_key") as IPayload
 
     const usersRepository = new UserRepository()
-    const userExists = await usersRepository.findById(user_id)
+    const user = await usersRepository.findById(user_id)
 
-    if (!userExists) {
+    if (!user) {
       throw new AppError("Token missing", 401)
+    }
+
+    req.user = {
+      id: user.id
     }
 
     next()
