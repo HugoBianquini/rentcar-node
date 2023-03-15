@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { deleteFile } from "../../../../utils/file";
-import { User } from "../../entities/User";
+import { User } from "../../infra/typeorm/entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 interface IRequest {
