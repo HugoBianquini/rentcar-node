@@ -10,14 +10,14 @@ interface IRequest {
   license_plate: string;
   fine_amount: number;
   brand: string;
-  category_id: string
+  category_id: string;
 }
 
-//@injectable()
+@injectable()
 class CreateCarUseCase {
 
   constructor(
-    // @inject("CarsRepository")
+    @inject("CarsRepository")
     private carsRepository: ICarsRepository
   ) { }
 
