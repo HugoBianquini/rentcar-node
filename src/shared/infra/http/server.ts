@@ -5,12 +5,14 @@ import swaggerUi from "swagger-ui-express"
 
 import swaggerFile from "../../../swagger.json";
 
-import "../typeorm"
+import createConnection from "../typeorm"
 
 import "../../container"
 
 import { router } from './routes';
 import { errorMiddleware } from './middlewares/errorMiddleware';
+
+createConnection("localhost")
 
 const app = express()
 
