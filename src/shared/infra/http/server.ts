@@ -12,7 +12,7 @@ import "../../container"
 import { router } from './routes';
 import { errorMiddleware } from './middlewares/errorMiddleware';
 
-createConnection("localhost")
+createConnection("database")
 
 const app = express()
 
