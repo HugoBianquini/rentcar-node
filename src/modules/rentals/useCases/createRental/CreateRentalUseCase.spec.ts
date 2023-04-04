@@ -2,9 +2,11 @@ import dayjs from "dayjs";
 import { AppError } from "../../../../shared/errors/AppError";
 import { RentalsRepositoryInMemory } from "../../repositories/in-memory/RentalsRepositoryInMemory"
 import { CreateRentalUseCase } from "./CreateRentalUseCase"
+import { DayjsDateProvider } from "../../../../shared/container/providers/DateProvider/implementations/DayjsDateProvider";
 
 let createRentalUseCase: CreateRentalUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
+let dayjsDateProvider: DayjsDateProvider
 
 describe("Create Rental", () => {
 
@@ -12,7 +14,8 @@ describe("Create Rental", () => {
 
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory()
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory)
+    dayjsDateProvider = new DayjsDateProvider()
+    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory, dayjsDateProvider)
   })
 
   it("should be able to create new rental", async () => {
