@@ -8,7 +8,7 @@ import createConnection from "../../../../shared/infra/typeorm"
 
 let conn: Connection
 
-describe("Create Category Controller", () => {
+describe("List Categories Controller", () => {
 
   beforeAll(async () => {
     conn = await createConnection()
@@ -28,7 +28,7 @@ describe("Create Category Controller", () => {
     await conn.close()
   })
 
-  it("should be able to create a new category", async () => {
+  it("should be able to list categories", async () => {
 
     const responseToken = await request(app).post("/sessions")
       .send({
@@ -38,33 +38,19 @@ describe("Create Category Controller", () => {
 
     const { token } = responseToken.body
 
-    const response = await request(app).post("/categories").send({
+    await request(app).post("/categories").send({
       name: "test",
       description: "test"
     }).set({
       Authorization: `Bearer ${token}`
     })
 
-    expect(response.status).toBe(201)
-  })
+    const response = await request(app).get("/categories")
 
-  it("should not be able to create a new category with existent name", async () => {
+    expect(response.status).toBe(200)
+    expect(response.body.length).toBe(1)
+    expect(response.body[0]).toHaveProperty("id")
+    expect(response.body[0].name).toEqual("test")
 
-    const responseToken = await request(app).post("/sessions")
-      .send({
-        email: "admin@rentcar.com",
-        password: "admin"
-      })
-
-    const { token } = responseToken.body
-
-    const response = await request(app).post("/categories").send({
-      name: "test",
-      description: "test"
-    }).set({
-      Authorization: `Bearer ${token}`
-    })
-
-    expect(response.status).toBe(400)
   })
 })
