@@ -53,7 +53,7 @@ describe("Create Car", () => {
 
     expect(async () => {
       await createRepeatedCar()
-    }).rejects.toBeInstanceOf(AppError)
+    }).rejects.toEqual(new AppError("Car already exists!"))
   }),
 
 

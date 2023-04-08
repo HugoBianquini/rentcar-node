@@ -40,7 +40,7 @@ describe("Create category", () => {
       await createCategoryUseCase.execute(category)
     }
 
-    expect(createDuplicatedCategory()).rejects.toBeInstanceOf(AppError)
+    expect(createDuplicatedCategory()).rejects.toEqual(new AppError("Category Already exists!"))
 
   })
 })

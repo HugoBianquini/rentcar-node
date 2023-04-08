@@ -44,7 +44,7 @@ describe("Authenticate User", () => {
       })
     }
 
-    expect(authenticate()).rejects.toBeInstanceOf(AppError)
+    expect(authenticate()).rejects.toEqual(new AppError("Email or password incorrect"))
   })
 
   it("should not authenticate user with incorrect password", async () => {
@@ -64,6 +64,6 @@ describe("Authenticate User", () => {
       })
     }
 
-    expect(authenticate()).rejects.toBeInstanceOf(AppError)
+    expect(authenticate()).rejects.toEqual(new AppError("Email or password incorrect"))
   })
 })
