@@ -16,6 +16,11 @@
         ],
         "summary": "Create a category",
         "description": "Create a new category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -90,6 +95,11 @@
         ],
         "summary": "Upload a new category",
         "description": "Upload a new category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -119,6 +129,11 @@
         ],
         "summary": "Create a specification",
         "description": "Create a new specification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -137,6 +152,32 @@
           }
         }
       }
+    },
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "User Authentication",
+        "description": "User Authentication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Sessions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password incorrect"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -149,6 +190,26 @@
         "description": {
           "type": "string"
         }
+      }
+    },
+    "Sessions": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
