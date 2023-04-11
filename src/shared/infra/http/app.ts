@@ -1,4 +1,6 @@
-import express, { NextFunction, Request, Response } from 'express';
+import "dotenv/config"
+import express from 'express';
+
 import "express-async-errors"
 
 import swaggerUi from "swagger-ui-express"
