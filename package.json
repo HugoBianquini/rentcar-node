@@ -16,6 +16,7 @@
     "@aws-sdk/client-s3": "^3.310.0",
     "@types/multer": "^1.4.7",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
     "csv-parse": "^5.3.5",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
