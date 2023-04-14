@@ -1,0 +1,28 @@
+-- Use an EC2 instance on AWS
+
+- Configure SSH
+- Create "app" user and grant it sudo permissions
+- Create `.ssh` folder under app user
+- Create `authorized_keys` file and put your ssh public key on it
+- Run "sudo apt update"
+- Install Node via apt
+- Install docker via apt
+- Grant docker permission to your user (check running docker ps)
+- Install yarn using npm
+
+
+-- Configure your application 
+
+- create build script on package.json using babel
+- add .env on gitignore (the env will be rewritten for prod environment)
+- add ormconfig.json on gitignote (it will be replaced by the prod database)
+
+
+-- Prepare application on EC2
+
+- create a ssh key and put it into github
+- clone your repository
+- run docker-compose -d database to run just your database in a container
+- run your application through dist folder "node ./dist/shared/infra/http/server.js"
+
+OBS: build the application using babel to convert typescript to javascript. This makes the deploy on the VM easier
