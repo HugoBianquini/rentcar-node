@@ -1,9 +1,11 @@
 -- Use an EC2 instance on AWS
 
 - Configure SSH
-- Create "app" user and grant it sudo permissions
-- Create `.ssh` folder under app user
-- Create `authorized_keys` file and put your ssh public key on it
+- Create "app" user and grant it sudo permissions (sudo adduser app)(sudo usermod -aG sudo app)
+- Login as the created user (sudo su - app)
+- Create `.ssh` folder under app user (mkdir .ssh)(chmod 700 .ssh/)
+- Create `authorized_keys` file and put your ssh public key on it (touch authorized_keys)(cat ~/.ssh/id_rsa.pub to get key in your terminal)
+- After paste the ssh key in VM, just run this command on your terminal to access the VM directly in app user (ssh app@<instance-public-ip>)
 - Run "sudo apt update"
 - Install Node via apt
 - Install docker via apt
@@ -15,14 +17,41 @@
 
 - create build script on package.json using babel
 - add .env on gitignore (the env will be rewritten for prod environment)
-- add ormconfig.json on gitignote (it will be replaced by the prod database)
+- add ormconfig.json on gitignore (it will be replaced by the prod database)
 
 
 -- Prepare application on EC2
 
 - create a ssh key and put it into github
 - clone your repository
-- run docker-compose -d database to run just your database in a container
-- run your application through dist folder "node ./dist/shared/infra/http/server.js"
+- run docker compose up -d database to run just your database in a container
+- run your application through dist folder "node ./dist/shared/infra/http/server.js" and ensure that no error occurs
+- install nginx on your instance (sudo apt install nginx)
+
+  -- Configure reverse proxy (nginx) (ensure ports 80 and 443 are available in your instance)
+- (cd /etc/nginx/sites-available)
+- create your nginx config file and follow https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04#step-4-setting-up-nginx-as-a-reverse-proxy-server 
+(touch rentcar) (sudo vim rentcar)
+- after configure your file, create a symbolic link in /etc/nginx/sites-enabled (sudo ln -s /etc/nginx/sites-available/rentcar rentcar)
+- delete the default file from /etc/nginx/sites-available and /etc/nginx/sites-enabled
+- restart nginx (sudo service nginx restart)
+- start your application server and try to reach your public ip instance from the browser
+
+  -- Configure pm2
+- install pm2 (yarn global add pm2)
+- run your app with pm2 (pm2 start dist/shared/infra/http/server.js --name rentcar)
+
+  -- Run migrations
+- yarn typeorm migration:run
+
+-- Try your endpoints! Use your EC2 instance public ip
+
+
+-- Prepare CI/CD
+
+- prepare CI/CD using github actions, see .github/workflows 
+
+
+
 
 OBS: build the application using babel to convert typescript to javascript. This makes the deploy on the VM easier
