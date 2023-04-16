@@ -14,10 +14,13 @@ import "../../container"
 import { router } from './routes';
 import { errorMiddleware } from './middlewares/errorMiddleware';
 import upload from "../../../config/upload";
+import rateLimiter from "./middlewares/rateLimiter";
 
-createConnection("database")
+createConnection()
 
 const app = express()
+
+app.use(rateLimiter)
 
 app.use(express.json())
 
