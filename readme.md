@@ -2,13 +2,65 @@
 
 __RentCar Node__ is the backend service responsible to serve all rentCar front-end applications
 
-<h3> It still a WORK IN PROGRESS <h3>
+# Pre-requesites
+
+- Node >= v14.x
+- npm or yarn
+- Docker
+
 <br>
 
 # Running the application
 
-<p>IN PROGRESS</p>
-<br>
+1. Install the dependencies
+
+```
+yarn
+```
+
+
+2. Setup your dev environment running docker-compose
+
+```
+docker-compose up -d
+```
+
+
+3. Run all migrations
+
+```
+yarn typeorm migration:run
+```
+
+4. Start the application
+
+```
+yarn dev
+```
+
+
+# Testing
+
+The unit tests were written uning `jest`, while the integration tests were simulated using `supertest`
+<br> <br>
+To execute all tests, just run
+
+```
+yarn test
+```
+
+# CI/CD
+
+After push any commit into `main` branch, the CI/CD flow will be initialized through a github action.
+
+The flow folow these steps:
+
+- Checkout
+- Build
+- Transfer files for the Virtual Machine where it will be deployed
+- Install dependencies in the virtual machine
+- Deploy the application
+
 
 # Database
 
